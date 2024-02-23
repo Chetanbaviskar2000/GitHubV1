@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9,3.10]
+        python-version: [3.8, 3.9, 3.10]
 
     steps:
     - uses: actions/checkout@v3
@@ -16,21 +16,16 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-            
-     - script: sudo apt-get install python-dev libkrb5-dev
-       displayName: "Install Kerberos libraries"
-     - script: pip install pywinrm
-       displayName: "Install WinRM module"
-     - script: pip install kerberos
-       displayName: "Install Kerberos module"
-     - script: sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install krb5-user
-       displayName: "Installing Kerberos Authentication Pre-requisites"
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        sudo apt-get install python-dev libkrb5-dev
+        pip install pywinrm
+        pip install kerberos
         pip install pytest
-
+        sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install krb5-user
+        
     - name: Run tests
       run: |
         cd src
