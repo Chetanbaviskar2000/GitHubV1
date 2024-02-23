@@ -17,13 +17,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
             
-    - script: sudo apt-get install python-dev libkrb5-dev
+     - script: sudo apt-get install python-dev libkrb5-dev
        displayName: "Install Kerberos libraries"
-    - script: pip install pywinrm
+     - script: pip install pywinrm
        displayName: "Install WinRM module"
-    - script: pip install kerberos
+     - script: pip install kerberos
        displayName: "Install Kerberos module"
-    - script: sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install krb5-user
+     - script: sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install krb5-user
        displayName: "Installing Kerberos Authentication Pre-requisites"
 
     - name: Install dependencies
