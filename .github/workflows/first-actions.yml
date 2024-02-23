@@ -20,6 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        sudo apt install openjdk-11-jdk
         sudo apt install ansible
         pip install pywinrm
         pip install kerberos
