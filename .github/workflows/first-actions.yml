@@ -24,11 +24,9 @@ jobs:
         sudo pip3 install ansible
         sudo apt install ansible
         pip install pywinrm
-        pip install kerberos
         pip install pytest
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install krb5-user
         
     - name: Run tests
       run: |
         cd src
-        python -m pytest addition.py
+        python -m pytest main.yaml
