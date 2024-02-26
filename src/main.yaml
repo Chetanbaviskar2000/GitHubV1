@@ -1,3 +1,4 @@
+---
 - name: Login
   shell: |
     export AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
