@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -29,5 +29,4 @@ jobs:
     - name: Run tests
       run: |
         cd src
-        ansible-playbook main.yaml
         python -m pytest addition.py
