@@ -1,4 +1,4 @@
-name: My First GitHub Actions demo see
+name: My First GitHub Actions demo see what
 
 on: [push]
 
