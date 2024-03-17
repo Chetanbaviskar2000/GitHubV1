@@ -21,9 +21,9 @@ jobs:
       run: |
         sudo apt install openjdk-11-jdk
         sudo pip3 install ansible
+        pip install pytest
         sudo apt install ansible
         pip install pywinrm
-        pip install pytest
         
     - name: Run tests
       run: |
