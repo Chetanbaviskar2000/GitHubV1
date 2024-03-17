@@ -19,6 +19,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip install pytest
         sudo apt install openjdk-11-jdk
         sudo pip3 install ansible
         pip install pytest
