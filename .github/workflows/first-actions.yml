@@ -28,3 +28,4 @@ jobs:
       run: |
         cd src
         python -m pytest addition.py
+        ansible-playbook -i inventory ansible_playbook.yaml
