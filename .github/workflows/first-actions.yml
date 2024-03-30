@@ -35,7 +35,7 @@ jobs:
     - name: Run Bash script
       run: |
         # Replace placeholders with actual values
-        region="ap-south-1"
+        region="us-east-1"
         instanceId="i-0123456789abcdef0"
 
           # Get the status of the EC2 instance
