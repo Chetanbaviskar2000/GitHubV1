@@ -30,12 +30,12 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+        aws-region: ap-south-1
 
     - name: Run Bash script
       run: |
         # Replace placeholders with actual values
-        region="us-east-1"
+        region="ap-south-1"
         instanceId="i-0123456789abcdef0"
 
           # Get the status of the EC2 instance
