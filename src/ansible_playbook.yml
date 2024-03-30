@@ -1,16 +1,17 @@
----
-- hosts: localhost
-  gather_facts: False
+- name: Stop EC2 instance
+  hosts: localhost
   tasks:
     - name: Set AWS credentials as environment variables
       shell: |
-        export AWS_ACCESS_KEY_ID=your_access_key
-        export AWS_SECRET_ACCESS_KEY=your_secret_key
-        export AWS_DEFAULT_REGION=your_region
-        
+        export AWS_ACCESS_KEY_ID={{ secrets.AWS_ACCESS_KEY_ID }}
+        export AWS_SECRET_ACCESS_KEY={{ secrets.AWS_SECRET_ACCESS_KEY }}
+        export AWS_DEFAULT_REGION={{ secrets.AWS_DEFAULT_REGION }}
+      environment:
+        AWS_ACCESS_KEY_ID: "{{ secrets.AWS_ACCESS_KEY_ID }}"
+        AWS_SECRET_ACCESS_KEY: "{{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        AWS_DEFAULT_REGION: "{{ secrets.AWS_DEFAULT_REGION }}"
     - name: Stop EC2 instance
       amazon.aws.ec2:
         instance_ids: your_instance_id
         state: stopped
         region: us-west-1
-
