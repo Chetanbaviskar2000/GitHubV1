@@ -1,4 +1,4 @@
-- name: Stop EC2 instance
+- name: Stop EC2 instance for op
   hosts: localhost
   tasks:
     - name: Set AWS credentials as environment variables
