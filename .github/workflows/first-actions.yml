@@ -22,7 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         docker pull ubuntu:20.04
         sudo service docker restart
-        docker run -it --name my_ubuntu_container ubuntu:20.04
+        docker run my-docker-image:latest        
         ansible-galaxy collection install amazon.aws
         pip install pytest
         sudo apt install ansible
