@@ -33,6 +33,13 @@ jobs:
         sudo apt install ansible
         pip install pywinrm
         
+      - name: Build and push Docker image
+        run: |
+          docker build -t my-hotel-app .
+          docker tag my-hotel-app:latest my-docker-image:latest
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push my-docker-image:latest
+        
     - name: Set up AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
