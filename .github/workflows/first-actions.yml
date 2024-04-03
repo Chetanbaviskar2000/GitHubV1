@@ -29,7 +29,6 @@ jobs:
         docker build -t my-app
         docker tag my-app:latest my-docker-image:latest
         docker push my-docker-image:latest
-        docker run my-docker-image:latest        
         ansible-galaxy collection install amazon.aws
         pip install pytest
         sudo apt install ansible
