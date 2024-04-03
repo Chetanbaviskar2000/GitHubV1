@@ -1,8 +1,0 @@
----
-- name: Login
-  shell: |
-    export AZURE_CLI_DISABLE_CONNECTION_VERIFICATION=1
-    az login --identity
-    az account set --subscription {{ subscription_Id }}
-  delegate_to: localhost
-
