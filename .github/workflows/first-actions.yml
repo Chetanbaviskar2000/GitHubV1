@@ -57,7 +57,7 @@ jobs:
           # Get the status of the EC2 instance
         instanceStatus=$(aws ec2 describe-instance-status --instance-id $instanceId --region $region --query 'InstanceStatuses[*].InstanceState.Name' --output text)
 
-        echo "The status of the EC2 instance is: $instanceStatus"
+        echo "The status of the EC2 instance is: $instanceStatushmm"
         
     - name: Run tests
       run: |
