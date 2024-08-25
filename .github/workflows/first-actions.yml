@@ -14,10 +14,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - uses: actions/upload-artifact@v3
-      with:
-        name: Build
-        path: dist/
     - name: Install dependenciesm
       run: |
         sudo apt-get update
