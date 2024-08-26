@@ -3,42 +3,46 @@ name: My First GitHub Actions Demo
 on: [push]
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     - name: Install dependencies
       run: |
-        sudo apt-get remove --purge containerd.io containerd
-        sudo apt-get clean
-        sudo apt-get autoremove -y
-        sudo apt-get update
-        sudo apt-get upgrade -y
-        sudo apt-get install -f
-        sudo apt-get install -y docker.io ansible
+        sudo apt-get update && sudo apt-get install -y docker.io ansible
         python -m pip install --upgrade pip
-        docker pull ubuntu:20.04
-        echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-        docker build -t my-app .
-        docker tag my-app:latest my-docker-image:latest
-        docker push my-docker-image:latest
-        ansible-galaxy collection install amazon.aws
         pip install pytest pywinrm
-        
+        ansible-galaxy collection install amazon.aws
+
+  build:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v3
     - name: Build and push Docker image
       run: |
+        docker pull ubuntu:20.04
         docker build -t my-hotel-app .
         docker tag my-hotel-app:latest my-docker-image:latest
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
         docker push my-docker-image:latest
-        
+
+  aws-setup:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v3
     - name: Set up AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -46,17 +50,23 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
+  run-script:
+    runs-on: ubuntu-latest
+    needs: aws-setup
+    steps:
+    - uses: actions/checkout@v3
     - name: Run Bash script
       run: |
-        # Replace placeholders with actual values
         region="us-east-1"
         instanceId="i-0123456789abcdef0"
-
-        # Get the status of the EC2 instance
         instanceStatus=$(aws ec2 describe-instance-status --instance-id $instanceId --region $region --query 'InstanceStatuses[*].InstanceState.Name' --output text)
-
         echo "The status of the EC2 instance is: $instanceStatus"
-        
+
+  test:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v3
     - name: Run tests
       run: |
         cd src
