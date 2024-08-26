@@ -17,7 +17,11 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y docker.io
+        sudo apt-get upgrade -y
+        sudo apt-get install -f
+        sudo apt-get clean
+        sudo apt-get autoremove -y
+        sudo apt-get install -y docker.io ansible
         python -m pip install --upgrade pip
         docker pull ubuntu:20.04
         echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
@@ -25,9 +29,7 @@ jobs:
         docker tag my-app:latest my-docker-image:latest
         docker push my-docker-image:latest
         ansible-galaxy collection install amazon.aws
-        pip install pytest
-        sudo apt install ansible
-        pip install pywinrm
+        pip install pytest pywinrm
         
     - name: Build and push Docker image
       run: |
