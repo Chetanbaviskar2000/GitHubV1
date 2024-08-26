@@ -36,7 +36,7 @@ jobs:
       run: |
         docker build -t my-hotel-app .
         docker tag my-hotel-app:latest my-docker-image:latest
-        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
         docker push my-docker-image:latest
         
     - name: Set up AWS credentials
