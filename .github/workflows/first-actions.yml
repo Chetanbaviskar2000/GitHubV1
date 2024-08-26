@@ -20,7 +20,14 @@ jobs:
           ${{ runner.os }}-pip-
     - name: Install dependencies
       run: |
-        sudo apt-get update && sudo apt-get install -y docker.io ansible
+        sudo apt-mark unhold containerd.io containerd || true
+        sudo apt-get remove --purge containerd.io containerd -y
+        sudo apt-get clean
+        sudo apt-get autoremove -y
+        sudo apt-get update
+        sudo apt-get upgrade -y
+        sudo apt-get install -f
+        sudo apt-get install -y docker.io ansible
         python -m pip install --upgrade pip
         pip install pytest pywinrm
         ansible-galaxy collection install amazon.aws
