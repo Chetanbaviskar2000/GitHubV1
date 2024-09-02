@@ -104,7 +104,8 @@ jobs:
       run: |
         echo "Running custom shell commands"
         touch pradip1.txt
-        echo "This is the text to append" >> filename.txt
+        echo "This is the text to append" >> pradip1.txt
+        cat pradip1.txt
         # Add your custom shell commands here
         ls -la
         uname -a
