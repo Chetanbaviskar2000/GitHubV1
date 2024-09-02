@@ -20,6 +20,7 @@ jobs:
           ${{ runner.os }}-pip-
     - name: Install dependencies
       run: |
+        pwd
         sudo apt-mark unhold containerd.io containerd || true
         sudo apt-get remove --purge containerd.io containerd -y
         sudo apt-get clean
