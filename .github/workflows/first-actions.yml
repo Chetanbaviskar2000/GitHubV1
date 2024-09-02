@@ -1,4 +1,4 @@
-name: My First GitHub Actions Demodfsse
+name: My First GitHub Actions Demo
 
 on: [push]
 
@@ -94,3 +94,15 @@ jobs:
       run: |
         kubectl apply -f k8s/deployment.yaml
         kubectl apply -f k8s/service.yaml
+
+  shell-module:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - uses: actions/checkout@v3
+    - name: Execute Linux commands
+      run: |
+        echo "Running custom shell commands"
+        # Add your custom shell commands here
+        ls -la
+        uname -a
