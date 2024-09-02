@@ -103,6 +103,8 @@ jobs:
     - name: Execute Linux commands
       run: |
         echo "Running custom shell commands"
+        touch pradip1.txt
+        echo "This is the text to append" >> filename.txt
         # Add your custom shell commands here
         ls -la
         uname -a
