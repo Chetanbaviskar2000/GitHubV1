@@ -21,6 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         pwd
+        touch pradip1.txt
         sudo apt-mark unhold containerd.io containerd || true
         sudo apt-get remove --purge containerd.io containerd -y
         sudo apt-get clean
