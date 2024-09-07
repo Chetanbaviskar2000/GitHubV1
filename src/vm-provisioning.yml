@@ -3,6 +3,14 @@
   hosts: localhost
   gather_facts: no
   tasks:
+    -  name: Set connection based on os type
+       set_fact:
+         connection_type: "{{ ansible_os_family }}"
+
+    - name: Debug connection type
+      debug:
+        msg: "Connection type is {{ connection_type }}"
+        
     - name: Set connection based on os type
       set_fact:
         ansible_connection: "winrm"
