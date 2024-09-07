@@ -68,8 +68,8 @@ jobs:
    artifactory:
      - name: Save artifacts
        run: |
-        mkdir -p ${{ github.workspace }}/artifacts
-        cp -r src/test-results/* ${{ github.workspace }}/artifacts/
+         mkdir -p ${{ github.workspace }}/artifacts
+         cp -r src/test-results/* ${{ github.workspace }}/artifacts/
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
