@@ -46,7 +46,7 @@ jobs:
 
   run-script:
     runs-on: ubuntu-latest
-    needs: aws-setup
+    needs: build
     steps:
     - uses: actions/checkout@v3
     - name: Run Bash script
