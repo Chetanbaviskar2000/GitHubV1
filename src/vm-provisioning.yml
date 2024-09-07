@@ -13,9 +13,9 @@
         
     - name: Set connection based on os type
       set_fact:
-        ansible_connection: "winrm"
+        ansible_connection: "Debian"
       when:
-        - '"Windows" in os'
+        - '"Debian" in os'
 
     - name: Set connection based on os type
       set_fact:
