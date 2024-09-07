@@ -61,7 +61,7 @@ jobs:
     - name: Save artifacts
       run: |
         mkdir -p src/artifacts
-        cp src/test-results src/artifacts/
+        cp src/artifacts/
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
