@@ -11,14 +11,12 @@
       debug:
         msg: "Connection type is {{ connection_type }}"
         
-    - name: Set connection based on os type
+    - name: Set connection based on os type (Debian)
       set_fact:
         ansible_connection: "Debian"
-      when:
-        - '"Debian" in {{ connection_type }}'
+      when: '"Debian" in connection_type'
 
-    - name: Set connection based on os type
+    - name: Set connection based on os type (Debian)
       set_fact:
-        ansible_connection: "ssh"
-      when:
-        - '"RedHat" not in {{ connection_type }}'
+        ansible_connection: "Debian"
+      when: '"RedHat" not in connection_type'
