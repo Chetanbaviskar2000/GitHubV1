@@ -1,1 +1,11 @@
-Hii
+- name: Set connection based on os type
+  set_fact:
+    ansible_connection: "winrm"
+  when:
+    - '"Windows" in os'
+
+- name: Set connection based on os type
+  set_fact:
+    ansible_connection: "ssh"
+  when:
+    - '"RedHat" in os'
