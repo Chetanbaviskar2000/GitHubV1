@@ -79,7 +79,7 @@ jobs:
     - name: Run tests
       run: |
         cd src
-        python -m pytest addition.py
+        python -m addition.py
 
   deploy:
     runs-on: ubuntu-latest
