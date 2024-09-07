@@ -1,7 +1,7 @@
 ---
 - name: Provision VM
   hosts: localhost
-  gather_facts: no
+  gather_facts: yes
   tasks:
     -  name: Set connection based on os type
        set_fact:
