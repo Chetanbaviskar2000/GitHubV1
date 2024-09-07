@@ -42,8 +42,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker pull ubuntu:20.04
-        docker buildx build -t myimage:latest ./src
-
+        
   run-script:
     runs-on: ubuntu-latest
     needs: build
