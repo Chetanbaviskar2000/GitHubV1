@@ -43,18 +43,7 @@ jobs:
       run: |
         docker pull ubuntu:20.04
         
-  run-script:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - uses: actions/checkout@v3
-    - name: Run Bash script
-      run: |
-        region="us-east-1"
-        instanceId="i-0123456789abcdef0"
-        instanceStatus=$(aws ec2 describe-instance-status --instance-id $instanceId --region $region --query 'InstanceStatuses[*].InstanceState.Name' --output text)
-        echo "The status of the EC2 instance is: $instanceStatus"
-
+  
   test:
     runs-on: ubuntu-latest
     needs: setup
@@ -72,7 +61,7 @@ jobs:
     - name: Save artifacts
       run: |
         mkdir -p ${{ github.workspace }}/artifacts
-        cp -r src/test-results/* ${{ github.workspace }}/artifacts/
+        cp src/test-results ${{ github.workspace }}/artifacts/
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
