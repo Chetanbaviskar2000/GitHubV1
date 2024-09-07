@@ -67,7 +67,7 @@ jobs:
         
    artifactory:
      - name: Save artifacts
-      run: |
+       run: |
         mkdir -p ${{ github.workspace }}/artifacts
         cp -r src/test-results/* ${{ github.workspace }}/artifacts/
 
