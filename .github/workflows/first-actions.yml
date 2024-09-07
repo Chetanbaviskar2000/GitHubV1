@@ -65,11 +65,14 @@ jobs:
         cd src
         ansible-playbook vm-provisioning.yml
         
-   artifactory:
-     - name: Save artifacts
-       run: |
-         mkdir -p ${{ github.workspace }}/artifacts
-         cp -r src/test-results/* ${{ github.workspace }}/artifacts/
+  artifactory:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+    - name: Save artifacts
+      run: |
+        mkdir -p ${{ github.workspace }}/artifacts
+        cp -r src/test-results/* ${{ github.workspace }}/artifacts/
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
