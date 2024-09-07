@@ -42,7 +42,8 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker pull ubuntu:20.04
-        
+        mkdir -p ${{ github.workspace }}/docker-images
+        docker save ubuntu:20.04 -o ${{ github.workspace }}/docker-images/ubuntu-20.04.tar      
   
   test:
     runs-on: ubuntu-latest
