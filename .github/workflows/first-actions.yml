@@ -79,7 +79,7 @@ jobs:
     - name: Run tests
       run: |
         cd src
-        ansible-playbook vm_prov.yml
+        ansible-playbook vm-provisioning.yml
         
   deploy:
     runs-on: ubuntu-latest
