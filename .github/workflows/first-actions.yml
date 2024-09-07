@@ -105,6 +105,7 @@ jobs:
         echo "Running custom shell commands"
         touch pradip1.txt
         echo "This is the text to append" >> pradip1.txt
+        echo "dgwgen79876" >> pradip1.txt
         cat pradip1.txt
         # Add your custom shell commands here
         ls -la
