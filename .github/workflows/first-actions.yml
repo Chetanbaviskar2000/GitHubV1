@@ -57,7 +57,7 @@ jobs:
         kubectl get pods -l app=my-app
 
         # Describe a specific pod
-        kubectl describe pod coredns-6f6b679f8f-zfrl2
+        POD_NAME=$(kubectl get pods -o jsonpath='{.items[0].metadata.name}')
 
         # Check deployment events
         kubectl describe deployment my-app
