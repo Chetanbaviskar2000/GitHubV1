@@ -69,8 +69,8 @@ jobs:
         kubectl describe nodes
 
         # Check logs of a specific pod
-        kubectl logs coredns-6f6b679f8f-zfrl2
-
+        kubectl logs (kubectl get pods -o jsonpath='{.items[0].metadata.name}')
+        
   build:
     runs-on: ubuntu-latest
     needs: setup
