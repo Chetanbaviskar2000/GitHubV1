@@ -49,9 +49,10 @@ jobs:
       run: minikube image build -t local/my-app:latest .
 
     - name: Deploy to Minikube
-      run: 
-         kubectl apply -f examples/deploy-to-k8s.yml
-         minikube service my-web-app
+      run: kubectl apply -f examples/deploy-to-k8s.yml
+    - name: Access the service
+      run: minikube service my-web-app
+         
 
     - name: Wait for deployment
       run: |
