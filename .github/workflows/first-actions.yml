@@ -50,8 +50,9 @@ jobs:
 
     - name: Deploy to Minikube
       run: kubectl apply -f examples/deploy-to-k8s.yml
+      
     - name: Access the service
-      run: minikube service my-app
+      run: kubectl get pods --all-namespaces | grep my-app
          
 
     - name: Wait for deployment
