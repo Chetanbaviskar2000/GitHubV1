@@ -69,7 +69,7 @@ jobs:
         kubectl describe nodes
 
         # Check logs of a specific pod
-        kubectl logs (kubectl get pods -o jsonpath='{.items[0].metadata.name}')
+        kubectl rollout status deployment/my-app
         
   build:
     runs-on: ubuntu-latest
