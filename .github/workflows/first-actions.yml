@@ -52,7 +52,24 @@ jobs:
       run: kubectl apply -f examples/deploy-to-k8s.yml
 
     - name: Wait for deployment
-      run: kubectl rollout status deployment/my-app
+      run: |
+         # Check the status of all pods
+        kubectl get pods -l app=my-app
+
+         # Describe a specific pod
+        kubectl describe pod coredns-6f6b679f8f-zfrl2
+
+         # Check deployment events
+        kubectl describe deployment my-app
+
+        # Check resource quotas
+        kubectl get resourcequotas
+
+        # Describe nodes to check resource availability
+        kubectl describe nodes
+
+        # Check logs of a specific pod
+        kubectl logs coredns-6f6b679f8f-zfrl2
 
   build:
     runs-on: ubuntu-latest
