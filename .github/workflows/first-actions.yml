@@ -49,17 +49,17 @@ jobs:
       run: minikube image build -t local/my-app:latest .
 
     - name: Deploy to Minikube
-      run: kubectl apply -f examples/deploy-to-k8s.yml
+      run: kubectl apply -f example/deploy-to-k8s.yml
 
     - name: Wait for deployment
       run: |
-         # Check the status of all pods
+        # Check the status of all pods
         kubectl get pods -l app=my-app
 
-         # Describe a specific pod
+        # Describe a specific pod
         kubectl describe pod coredns-6f6b679f8f-zfrl2
 
-         # Check deployment events
+        # Check deployment events
         kubectl describe deployment my-app
 
         # Check resource quotas
