@@ -49,7 +49,7 @@ jobs:
       run: minikube image build -t local/my-app:latest .
 
     - name: Deploy to Minikube
-      run: kubectl apply -f example/deploy-to-k8s.yml
+      run: kubectl apply -f examples/deploy-to-k8s.yml
 
     - name: Wait for deployment
       run: |
