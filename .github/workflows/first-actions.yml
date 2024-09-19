@@ -7,32 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Cache pip
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+
     - name: Install dependencies
       run: |
-        pwd
-        touch pradip1.txt
-        sudo apt-mark unhold containerd.io containerd || true
-        sudo apt-get remove --purge containerd.io containerd -y
-        sudo apt-get clean
-        sudo apt-get autoremove -y
         sudo apt-get update
-        sudo apt-get upgrade -y
-        sudo apt-get install -f
-        sudo apt-get install -y docker.io ansible
-        python -m pip install --upgrade pip
-        pip install pytest pywinrm
-        ansible-galaxy collection install amazon.aws
+        sudo apt-get install -y docker.io
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
@@ -71,65 +51,7 @@ jobs:
         POD_NAME=$(kubectl get pods -o jsonpath='{.items[0].metadata.name}')
 
         # Check deployment events
-        kubectl describe deployment node-app
-
-        # Check resource quotas
-        kubectl get resourcequotas
-
-        # Describe nodes to check resource availability
-        kubectl describe nodes
+        kubectl describe deployment node-app-deployment
 
         # Check logs of a specific pod
-        kubectl rollout status deployment/node-app
-        
-  build:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build and push Docker image
-      run: |
-        docker pull ubuntu:20.04
-        mkdir -p ${{ github.workspace }}/docker-images
-        docker save ubuntu:20.04 -o ${{ github.workspace }}/docker-images/ubuntu-20.04.tar      
-
-  test:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-    - uses: actions/checkout@v3
-    - name: Run tests
-      run: |
-        cd src
-        ansible-playbook vm-provisioning.yml
-        
-  artifactory:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-    - name: Save artifacts
-      run: |
-        mkdir -p src/artifacts
-        cp src/artifacts/* src/artifacts/
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: test-results
-        path: src/artifacts/
-
-  shell-module:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-    - uses: actions/checkout@v3
-    - name: Execute Linux commands
-      run: |
-        echo "Running custom shell commands"
-        touch pradip1.txt
-        echo "This is the text to append" >> pradip1.txt
-        echo "dgwgen79876" >> pradip1.txt
-        cat pradip1.txt
-        # Add your custom shell commands here
-        ls -la
-        uname -a
+        kubectl rollout status deployment/node-app-deployment
