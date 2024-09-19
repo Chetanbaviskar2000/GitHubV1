@@ -30,7 +30,7 @@ jobs:
       run: eval $(minikube -p minikube docker-env)
 
     - name: Build Docker image
-      run: docker build -t local/node-app:latest .
+      run: docker build -t local/node-app:latest ./examples
 
     - name: Verify Docker image
       run: docker images | grep node-app
