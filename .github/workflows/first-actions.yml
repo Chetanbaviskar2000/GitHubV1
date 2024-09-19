@@ -10,6 +10,10 @@ jobs:
 
     - name: Install dependencies
       run: |
+        sudo apt-mark unhold containerd.io containerd || true
+        sudo apt-get remove --purge containerd.io containerd -y
+        sudo apt-get clean
+        sudo apt-get autoremove -y
         sudo apt-get update
         sudo apt-get install -y docker.io
 
