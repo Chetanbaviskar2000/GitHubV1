@@ -1,4 +1,4 @@
-name: My First GitHub Actions Demo...
+name: My First GitHub Actions Demo
 
 on: [push]
 
@@ -43,21 +43,18 @@ jobs:
         driver: docker
         
     - name: Set up Docker environment for Minikube
-      run: eval $(minikube docker-env)
-
-    - name: Verify Minikube
-      run: kubectl get pods -A
+      run: eval $(minikube -p minikube docker-env)
 
     - name: Build Docker image
-      run: docker build -t local/node-app:latest ./examples
-      
+      run: docker build -t local/node-app:latest .
+
+    - name: Verify Docker image
+      run: docker images | grep node-app
+
     - name: Deploy to Minikube
       run: kubectl apply -f examples/deploy-to-k8s.yml
       
-    - name: Deploy to Minikube
-      run: kubectl get service 
-
-    - name: Minikube ip
+    - name: Get Minikube IP
       run: minikube ip
       
     - name: Port Forward
