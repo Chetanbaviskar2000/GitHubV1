@@ -61,7 +61,7 @@ jobs:
       run: minikube ip
       
     - name: Access the service
-      run: kubectl expose deployment my-app --type=NodePort --port=3001
+      run: kubectl expose deployment node-app--type=NodePort --port=3001
 
     - name: Wait for deployment
       run: |
