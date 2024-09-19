@@ -5,7 +5,7 @@ FROM node:14
 WORKDIR /app
 
 # Copy the contents of the examples folder into the container at /app
-COPY examples/ /app
+COPY . /app
 
 # Make port 3000 available to the world outside this container
 EXPOSE 3000
