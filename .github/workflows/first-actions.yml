@@ -49,7 +49,7 @@ jobs:
       run: docker build -t node-app:latest ./examples
       
     - name: Deploy to Minikube
-      run: kubectl apply -f examples/app/.yml
+      run: kubectl apply -f examples/deploy-to-k8s.yml
       
     - name: Deploy to Minikube
       run: kubectl get service 
