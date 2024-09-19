@@ -5,13 +5,13 @@ FROM node:14
 WORKDIR /usr/src/app
 
 # Copy application dependency manifests to the container image
-COPY package*.json ./
+COPY examples/package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy local code to the container image
-COPY . .
+COPY examples .
 
 # Run the web service on container startup
 CMD [ "node", "app.js" ]
