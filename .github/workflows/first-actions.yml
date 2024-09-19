@@ -67,7 +67,7 @@ jobs:
         POD_NAME=$(kubectl get pods -o jsonpath='{.items[0].metadata.name}')
 
         # Check deployment events
-        kubectl describe deployment my-app
+        kubectl describe deployment node-app
 
         # Check resource quotas
         kubectl get resourcequotas
@@ -76,7 +76,7 @@ jobs:
         kubectl describe nodes
 
         # Check logs of a specific pod
-        kubectl rollout status deployment/my-app
+        kubectl rollout status deployment/node-app
         
   build:
     runs-on: ubuntu-latest
