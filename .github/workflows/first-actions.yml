@@ -55,7 +55,7 @@ jobs:
       run: kubectl get service 
       
     - name: Access the service
-      run: kubectl get pods --all-namespaces | grep my-app
+      run: kubectl get pods --all-namespaces | grep node-app
          
 
     - name: Wait for deployment
