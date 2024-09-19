@@ -53,6 +53,13 @@ jobs:
 
         # Describe a specific pod
         POD_NAME=$(kubectl get pods -o jsonpath='{.items[0].metadata.name}')
+        
+        # Additional commands
+        minikube ip
+        kubectl get services
+        kubectl get pods
+        kubectl port-forward service/node-app-service 3000:3000
+
 
         # Check deployment events
         kubectl describe deployment node-app-deployment
@@ -60,8 +67,3 @@ jobs:
         # Check logs of a specific pod
         kubectl rollout status deployment/node-app-deployment
 
-        # Additional commands
-        minikube ip
-        kubectl get services
-        kubectl get pods
-        kubectl port-forward service/node-app-service 3000:3000
