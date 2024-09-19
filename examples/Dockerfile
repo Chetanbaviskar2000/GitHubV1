@@ -11,7 +11,7 @@ COPY examples/package*.json ./
 RUN npm install
 
 # Copy local code to the container image
-COPY examples .
+COPY . /app
 
 # Run the web service on container startup
 CMD [ "node", "app.js" ]
