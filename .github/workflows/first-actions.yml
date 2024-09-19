@@ -53,6 +53,9 @@ jobs:
       
     - name: Deploy to Minikube
       run: kubectl get service 
+
+    - name: Minikube ip
+      run: minikube ip
       
     - name: Access the service
       run: kubectl get pods --all-namespaces | grep node-app
