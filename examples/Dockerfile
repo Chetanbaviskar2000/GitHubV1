@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Make port 8080 available to the world outside this container
-EXPOSE 30001
+# Make port 3000 available to the world outside this container
+EXPOSE 3000
 
 # Run your script when the container launches
-CMD ["node", "your-script.js"]
+CMD ["node", "app.js"]
