@@ -46,8 +46,8 @@ jobs:
       run: kubectl get pods -A
 
     - name: Build Docker image
-      run: minikube image build -t local/node-app:latest .
-
+      run: docker build -t node-app:latest ./examples
+      
     - name: Deploy to Minikube
       run: kubectl apply -f examples/app/.yml
       
