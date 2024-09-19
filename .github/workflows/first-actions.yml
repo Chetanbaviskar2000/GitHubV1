@@ -60,8 +60,10 @@ jobs:
     - name: Minikube ip
       run: minikube ip
       
-    - name: Access the service
-      run: kubectl expose deployment node-app--type=NodePort --port=30001
+    - name: Port Forward
+      run: |
+        nohup kubectl port-forward service/node-app-service 3000:3000 &
+        sleep 10 # Give port-forwarding some time to establish
 
     - name: Wait for deployment
       run: |
