@@ -41,10 +41,6 @@ jobs:
     - name: Get Minikube IP
       run: minikube ip
       
-    - name: Port Forward
-      run: |
-        nohup kubectl port-forward service/node-app-service 3000:3000 &
-        sleep 10 # Give port-forwarding some time to establish
 
     - name: Wait for deployment
       run: |
@@ -58,6 +54,7 @@ jobs:
         minikube ip
         kubectl get services
         kubectl get pods
+        kubectl get pods --field-selector=status.phase=Pending -o jsonpath='{.items[*].metadata.name}'
         kubectl port-forward service/node-app-service 3000:3000
 
 
